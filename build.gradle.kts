@@ -21,6 +21,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
+//Run -> Edit Configuration -> Gradle-Publish, Environment Variables: USERNAME and TOKEN
+
 publishing {
     repositories {
         maven {
