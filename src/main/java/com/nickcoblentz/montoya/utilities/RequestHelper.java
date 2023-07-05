@@ -1,8 +1,10 @@
 package com.nickcoblentz.montoya.utilities;
 
+import burp.api.montoya.http.message.HttpHeader;
+import burp.api.montoya.http.message.requests.HttpRequest;
 import burp.api.montoya.proxy.http.InterceptedRequest;
 
-import java.net.http.HttpRequest;
+
 
 public class RequestHelper {
     private static String GetEmptyNoteIfNull(String note)
@@ -25,4 +27,20 @@ public class RequestHelper {
             interceptedRequest.annotations().setNotes(GetEmptyNoteIfNull(interceptedRequest.annotations().notes())+", " + note);
         }
     }
+
+    public static String GetHeaderValue(HttpRequest request, String headerName)
+    {
+        if(request!=null && request.headers()!=null)
+        {
+            for(HttpHeader header : request.headers())
+            {
+                if(header.name().equalsIgnoreCase(headerName))
+                {
+                    return header.value();
+                }
+            }
+        }
+        return null;
+    }
+
 }
