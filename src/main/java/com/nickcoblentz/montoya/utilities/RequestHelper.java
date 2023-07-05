@@ -7,24 +7,27 @@ import burp.api.montoya.proxy.http.InterceptedRequest;
 
 
 public class RequestHelper {
-    private static String GetEmptyNoteIfNull(String note)
+    private static String CombineNotes(String note1,String seperator, String note2)
     {
-        if (note == null) {
-            note = "";
+        if(note1==null || note1.length()<1){
+            return note2;
         }
-        return note;
+        if(note2==null || note1.length()<1){
+            return note1;
+        }
+        return note1+seperator+note2;
     }
     public static void PrependNote(InterceptedRequest interceptedRequest, String note)
     {
         if(interceptedRequest!=null) {
-            interceptedRequest.annotations().setNotes(note + ", " + GetEmptyNoteIfNull(interceptedRequest.annotations().notes()));
+            interceptedRequest.annotations().setNotes(CombineNotes(note,",",interceptedRequest.annotations().notes()));
         }
     }
 
     public static void AppendNote(InterceptedRequest interceptedRequest, String note)
     {
         if(interceptedRequest!=null) {
-            interceptedRequest.annotations().setNotes(GetEmptyNoteIfNull(interceptedRequest.annotations().notes())+", " + note);
+            interceptedRequest.annotations().setNotes(CombineNotes(interceptedRequest.annotations().notes(),",",note));
         }
     }
 
