@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.nickcoblentz"
+group = "com.nickcoblentz.montoya.libraries"
 version = "0.1.2"
 
 
