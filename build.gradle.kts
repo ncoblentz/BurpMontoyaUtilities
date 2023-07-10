@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.nickcoblentz.montoya.libraries"
-version = "0.2.2"
+version = "0.4.0"
 
 
 repositories {

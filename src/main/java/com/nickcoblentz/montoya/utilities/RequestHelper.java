@@ -1,9 +1,14 @@
 package com.nickcoblentz.montoya.utilities;
 
+import burp.api.montoya.MontoyaApi;
 import burp.api.montoya.http.message.HttpHeader;
+import burp.api.montoya.http.message.HttpRequestResponse;
 import burp.api.montoya.http.message.requests.HttpRequest;
+import burp.api.montoya.http.message.responses.HttpResponse;
 import burp.api.montoya.proxy.http.InterceptedRequest;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class RequestHelper {
@@ -46,4 +51,61 @@ public class RequestHelper {
         return null;
     }
 
+    public static String GetReferer(HttpRequest request)
+    {
+        String referer = "";
+        if(requestNotNull(request)) {
+            if (request != null) {
+                referer = RequestHelper.GetHeaderValue(request, "Referer");
+                if (referer == null) {
+                    referer = "";
+                }
+            }
+        }
+        return referer;
+    }
+
+    public static boolean requestNotNull(HttpRequestResponse baseRequestResponse)
+    {
+        return baseRequestResponse!=null && baseRequestResponse!=null;
+    }
+
+    public static boolean requestNotNull(HttpRequest request)
+    {
+        return request!=null;
+    }
+
+    public static boolean responseNotNull(HttpResponse response)
+    {
+        return response!=null;
+    }
+
+    public static boolean responseNotNull(HttpRequestResponse baseRequestResponse)
+    {
+        return baseRequestResponse!=null && baseRequestResponse.response()!=null;
+    }
+
+    public static URL getJavaURL(HttpRequestResponse baseRequestResponse)
+    {
+        return getJavaURL(baseRequestResponse.url());
+    }
+
+    public static URL getJavaURL(HttpRequest request)
+    {
+        return getJavaURL(request.url());
+    }
+
+    public static URL getJavaURL(String urlString)
+    {
+        URL url=null;
+        try
+        {
+            url = new URL(urlString);
+        }
+        catch(MalformedURLException e)
+        {
+            url=null;
+        }
+        return url;
+    }
 }
