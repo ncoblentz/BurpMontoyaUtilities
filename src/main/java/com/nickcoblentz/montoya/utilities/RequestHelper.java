@@ -6,6 +6,7 @@ import burp.api.montoya.http.message.HttpRequestResponse;
 import burp.api.montoya.http.message.requests.HttpRequest;
 import burp.api.montoya.http.message.responses.HttpResponse;
 import burp.api.montoya.proxy.http.InterceptedRequest;
+import burp.api.montoya.proxy.websocket.InterceptedTextMessage;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,6 +34,20 @@ public class RequestHelper {
     {
         if(interceptedRequest!=null) {
             interceptedRequest.annotations().setNotes(CombineNotes(interceptedRequest.annotations().notes(),",",note));
+        }
+    }
+
+    public static void PrependNote(InterceptedTextMessage interceptedTextMessage, String note)
+    {
+        if(interceptedTextMessage!=null) {
+            interceptedTextMessage.annotations().setNotes(CombineNotes(note,",",interceptedTextMessage.annotations().notes()));
+        }
+    }
+
+    public static void AppendNote(InterceptedTextMessage interceptedTextMessage, String note)
+    {
+        if(interceptedTextMessage!=null) {
+            interceptedTextMessage.annotations().setNotes(CombineNotes(interceptedTextMessage.annotations().notes(),",",note));
         }
     }
 
